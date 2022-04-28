@@ -3,10 +3,11 @@ package cancer;
 
 import java.util.Scanner;
 
-public class Cancer {
+public class Cancer 
+{
 
     static String[][] grid = new String[17][17];
-    //static int cancerSize = 0;
+
     public static void cancer(int row, int col)
     {
         if (grid[row][col].equals("-")) 
@@ -31,6 +32,7 @@ public class Cancer {
             {
                 System.out.print(grid[i][j]);
             }
+
             System.out.println();
         }
     }
@@ -62,7 +64,7 @@ public class Cancer {
             col = (int)(Math.random() * 15 + 1);
             grid[row][col] = "-";
         }
-
+        
         printGrid();
 
         for (int i = 1; i <= 15; i++)
@@ -76,6 +78,7 @@ public class Cancer {
                 }
             }
         }
+
         System.out.println("\n\nThe file has " + count + " cancers in it");
         System.out.println("The new grid is:\n");
 
