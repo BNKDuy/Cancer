@@ -13,6 +13,7 @@ public class Cancer
         if (grid[row][col].equals("-")) 
         {
             grid[row][col] = " ";
+            
             cancer(row - 1, col - 1);
             cancer(row - 1, col);
             cancer(row - 1, col + 1);
@@ -84,5 +85,4 @@ public class Cancer
 
         printGrid();
     }
-    
 }
