@@ -1,21 +1,85 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package cancer;
 
-/**
- *
- * @author khuon
- */
+import java.util.Scanner;
+
 public class Cancer {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    static String[][] grid = new String[17][17];
+    //static int cancerSize = 0;
+    public static void cancer(int row, int col)
+    {
+        if (grid[row][col].equals("-")) 
+        {
+            grid[row][col] = " ";
+            cancer(row - 1, col - 1);
+            cancer(row - 1, col);
+            cancer(row - 1, col + 1);
+            cancer(row, col - 1);
+            cancer(row, col + 1);
+            cancer(row + 1, col - 1);
+            cancer(row + 1, col);
+            cancer(row + 1, col + 1);
+        }
+    }
+
+    public static void printGrid()
+    {
+        for (int i = 1; i <= 15; i++)
+        {
+            for (int j = 1; j <= 15; j++)
+            {
+                System.out.print(grid[i][j]);
+            }
+            System.out.println();
+        }
+    }
+
+    public static void main(String[] args) 
+    {
+        int count = 0;
+        int row, col;
+        
+        for (int i = 0; i < 17; i++) 
+        {
+            for (int j = 0; j < 17; j++) 
+            {
+                grid[i][j] = " ";
+            }
+        }
+
+        for (int i = 1; i <= 15; i++)
+        {
+            for (int j = 1; j <= 15; j++)
+            {
+                grid[i][j] = "+";
+            }
+        }
+
+        for (int i = 0; i < 30; i++) 
+        {
+            row = (int)(Math.random() * 15 + 1);
+            col = (int)(Math.random() * 15 + 1);
+            grid[row][col] = "-";
+        }
+
+        printGrid();
+
+        for (int i = 1; i <= 15; i++)
+        {
+            for (int j = 1; j <= 15; j++)
+            {
+                if (grid[i][j].equals("-"))
+                {
+                    cancer(i, j);
+                    count++;
+                }
+            }
+        }
+        System.out.println("\n\nThe file has " + count + " cancers in it");
+        System.out.println("The new grid is:\n");
+
+        printGrid();
     }
     
 }
