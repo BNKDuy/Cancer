@@ -1,6 +1,7 @@
 
 package cancer;
 
+import java.io.*;
 import java.util.Scanner;
 
 public class Cancer 
@@ -38,10 +39,16 @@ public class Cancer
         }
     }
 
-    public static void main(String[] args) 
+    public static void main(String[] args) throws IOException
     {
         int count = 0;
-        int row, col;
+        int row, col, option;
+        String fileName;
+        
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("Please choose one option:\n1. Import your own file.\n2. Generate random file.");
+        option = input.nextInt();
         
         for (int i = 0; i < 17; i++) 
         {
@@ -50,21 +57,43 @@ public class Cancer
                 grid[i][j] = " ";
             }
         }
-
-        for (int i = 1; i <= 15; i++)
+        input.close();
+        if (option == 1)
         {
-            for (int j = 1; j <= 15; j++)
+            System.out.println("Please enter the file name(Please include .csv)");
+            fileName = input.nextLine();
+
+            File in = new File(fileName);
+
+            Scanner read = new Scanner(in);
+            read.useDelimiter(",|\r\n");
+
+            for (int i = 1; i <= 15; i++)
             {
-                grid[i][j] = "+";
+                for (int j = 0; j <= 15; j++)
+                {
+                    grid[i][j] = read.next();
+                }
             }
+            
         }
-
-        for (int i = 0; i < 30; i++) 
+        else
         {
-            row = (int)(Math.random() * 15 + 1);
-            col = (int)(Math.random() * 15 + 1);
-            grid[row][col] = "-";
-        }
+            for (int i = 1; i <= 15; i++)
+            {
+                for (int j = 1; j <= 15; j++)
+                {
+                    grid[i][j] = "+";
+                }
+            }
+
+            for (int i = 0; i < 30; i++) 
+            {
+                row = (int)(Math.random() * 15 + 1);
+                col = (int)(Math.random() * 15 + 1);
+                grid[row][col] = "-";
+            }
+        }  
         
         printGrid();
 
